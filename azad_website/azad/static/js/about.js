@@ -260,4 +260,20 @@
      */
     new PureCounter();
 
+    /*to display hcm members based on year selected*/
+    let hcmYear = document.getElementById("hcm-year");
+    hcmYear.addEventListener('click', ()=>{
+        let id = "hcm" + hcmYear.value;
+        console.log(id);
+        let elems = document.querySelectorAll(".hcmMembers");
+        elems.forEach((elem)=>{
+            elem.style.display = "none";
+        })
+        let selectedElem = document.getElementById(id);
+        selectedElem.style.display = "grid";
+
+        let webElemId = "web" + hcmYear.value;
+        let webElem = document.getElementById(webElemId);
+        webElem.style.display = "block";
+    })
 })()
