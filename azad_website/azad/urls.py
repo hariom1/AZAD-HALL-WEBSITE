@@ -1,5 +1,5 @@
-from django.urls import path
-
+from django.urls import path, include
+from django.contrib.auth.views import logout_then_login
 from . import views
 
 urlpatterns = [
@@ -13,5 +13,7 @@ urlpatterns = [
     path('about', views.about, name='about'),
     path('post/comment', views.postComment, name="post_comment"),
     path('login', views.login, name='login'),
-
+    path('', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('custom_logout', views.custom_logout, name='custom_logout'),
 ]

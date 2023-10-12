@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 
 <html lang="en-US">
@@ -325,6 +326,13 @@
                             <a style="margin-bottom: 3px;" href="{% url 'achievements' %}" class="btn btn-default next">Achievements</a>
                             <a style="margin-bottom: 3px;" href="{% url 'noticeboard' %}" class="btn btn-default next">Noticeboard</a>
                             <a style="margin-bottom: 3px;" href="{% url 'about' %}" class="btn btn-default next">About</a>
+                            {% if user.is_authenticated %}
+                            <a style="margin-bottom: 3px;" href="{% url 'custom_logout' %}" class="btn btn-default next">Logout</a>
+                            <p style="margin: 0;font-size: 16px;margin-bottom: 10px;color: white;">  Welcome, You are logged in as {{ user.username }}</p>
+                          
+                            {% else %}
+                            <a style="margin-bottom: 3px;" href="{% provider_login_url 'google' %}" class="btn btn-default next">Login(use insti id)</a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="image" data-background="{% static 'img/azad.jpg' %}"></div>

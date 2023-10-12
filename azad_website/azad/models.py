@@ -3,6 +3,10 @@ from datetime import datetime
 
 # Create your models here.
 
+class Allemail(models.Model):
+    allemails=models.EmailField()
+    
+    
 
 class Event(models.Model):
     title = models.CharField(max_length=200)
