@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-%*-!5@3%z+2br$s7pr_%g97dwaim7$r9ju&_#=xrmr*yam+q7r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['somya.pythonanywhere.com','127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['somya.pythonanywhere.com','127.0.0.1', 'localhost', '2321-203-110-242-34.ngrok-free.app']
 
 
 # Application definition
@@ -38,8 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'azad'
+    'azad',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'azad_website.urls'
@@ -102,6 +111,19 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'APP': {
+            'client_id': '849423050293-a80hoh8l9us2c17h974ojn5aqr5qprqj.apps.googleusercontent.com',
+            'secret': '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',
+            'key': '',  # Optional, you can leave this empty
+        }
+    }
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -139,3 +161,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'emailhost'
 EMAIL_HOST_PASSWORD = "password"
 EMAIL_PORT = 587
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+SITE_ID = 2
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

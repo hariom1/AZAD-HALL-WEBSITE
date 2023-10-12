@@ -6,6 +6,9 @@ from .forms import ContactForm, CommentForm
 from django.core.mail import BadHeaderError, send_mail
 from django.http import JsonResponse
 from django.core import serializers
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth import logout
+from django.contrib.auth.models import User
 
 # def index(request):
 #     return HttpResponse("Hello, world")
@@ -14,6 +17,13 @@ def login(request):
     return render(request, 'login.html')
 
 def index(request):
+    if request.user.is_authenticated:
+        emails=request.user.email
+        allemails=Allemail.objects.all()
+        for email in allemails:
+            if email.allemails==emails:
+                return render(request, 'index.html')
+        logout(request)
     return render(request, 'index.html')
 
 
@@ -113,3 +123,8 @@ def event(request, eventid):
     # print(cover.caption)
     events = Event.objects.all()
     return render(request, 'event.html', {'events': events, 'cover': cover, 'event': event[0], 'form': commentform, 'comments': comments})
+
+def custom_logout(request):
+    logout(request)
+    return redirect("/")
+

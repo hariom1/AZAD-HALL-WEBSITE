@@ -11,6 +11,7 @@ admin.site.register(Team)
 admin.site.register(Year)
 admin.site.register(Contact)
 admin.site.register(Para)
+admin.site.register(Allemail)
 # admin.site.register(Contact)
 
 
