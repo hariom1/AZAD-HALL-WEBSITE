@@ -1,6 +1,8 @@
 from django.urls import path, include
 from django.contrib.auth.views import logout_then_login
 from . import views
+from django.conf import settings 
+from django.conf.urls.static import static  
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -16,4 +18,15 @@ urlpatterns = [
     path('', include('allauth.urls')),
     path('accounts/', include('allauth.urls')),
     path('custom_logout', views.custom_logout, name='custom_logout'),
+    path('addBoarders', views.addBoarders, name='addBoarders'),
+    path('importFromExcel', views.import_from_excel, name='importFromExcel'),
+    path('complain', views.complain, name='complain'),
+    path('submit', views.submit_form, name='submit_form'),
+    path('showComplaints', views.showComplaints, name='showComplaints'),
+    path('updateStatus', views.updateStatus, name='updateStatus'),
+    path('complain_status', views.complain_status, name='complain_status'),
+    path('fullComplain/<int:complain_id>', views.showFullComplain, name='fullComplain'),
 ]
+
+if settings.DEBUG:  
+        urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)  

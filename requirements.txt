@@ -3,3 +3,5 @@ Django==4.1.4
 Pillow==9.3.0
 sqlparse==0.4.3
 tzdata==2022.7
+django-allauth
+openpyxl==3.1.2
