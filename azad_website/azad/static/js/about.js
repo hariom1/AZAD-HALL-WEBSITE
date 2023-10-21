@@ -272,8 +272,28 @@
         let selectedElem = document.getElementById(id);
         selectedElem.style.display = "grid";
 
-        let webElemId = "web" + hcmYear.value;
-        let webElem = document.getElementById(webElemId);
-        webElem.style.display = "block";
+    })
+
+    let webYear = document.getElementById("web-year");
+    webYear.addEventListener('click', ()=>{
+        let id = "web" + webYear.value;
+        console.log(id);
+        let elems = document.querySelectorAll(".webMembers");
+        elems.forEach((elem)=>{
+            elem.style.display = "none";
+        })
+        let selectedElem = document.getElementById(id);
+        selectedElem.style.display = "grid";
+    })
+    let capYear = document.getElementById("gccaptain-year");
+    capYear.addEventListener('click', ()=>{
+        let id = "captains" + capYear.value;
+        console.log(id);
+        let elems = document.querySelectorAll(".captains");
+        elems.forEach((elem)=>{
+            elem.style.display = "none";
+        })
+        let selectedElem = document.getElementById(id);
+        selectedElem.style.display = "flex";
     })
 })()

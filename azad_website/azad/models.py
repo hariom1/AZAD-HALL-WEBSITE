@@ -3,10 +3,26 @@ from datetime import datetime
 
 # Create your models here.
 
-class Allemail(models.Model):
-    allemails=models.EmailField()
+class azad_boarders(models.Model):
+    roll_no=models.CharField(max_length=15)
+    name=models.CharField(max_length=50)
+    emails=models.EmailField()
+    contact=models.CharField(max_length=12, null=True)
     
-    
+class complaints(models.Model):
+    name=models.CharField(max_length=50)
+    roll_no=models.CharField(max_length=15)
+    category = models.CharField(max_length=20, default="mess")
+    email=models.EmailField()
+    contact_no=models.CharField(max_length=12, null=True)
+    room_no=models.CharField(max_length=5)
+    complain=models.CharField(max_length=500)
+    status=models.CharField(max_length=10)
+    review=models.CharField(max_length=250, default=None,null=True)
+    created_at=models.CharField(max_length=20)
+    modified_at=models.CharField(max_length=20)
+    manager_review=models.CharField(max_length=500, null=True)
+    image = models.ImageField(upload_to='complain_images', null=True)  # You can specify the upload path
 
 class Event(models.Model):
     title = models.CharField(max_length=200)

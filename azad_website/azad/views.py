@@ -9,23 +9,108 @@ from django.core import serializers
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
+from openpyxl import load_workbook
+from datetime import datetime, timedelta
+from django.contrib import messages
+
 
 # def index(request):
 #     return HttpResponse("Hello, world")
+
+#code to import excel entries into azad_boarders model
+def import_from_excel(request):
+    if request.method == 'POST':
+        excel_file = request.FILES['excel_file']
+        wb = load_workbook(excel_file)
+        ws = wb.active
+
+        for row in ws.iter_rows(values_only=True):
+            roll_no, name, email, number = row
+            azad_boarders.objects.create(name=name, roll_no=roll_no, emails=email, contact=number)
+
+        return render(request, 'index.html')
+def addBoarders(request):
+    return render(request, 'addBoarders.html') 
+
 
 def login(request):
     return render(request, 'login.html')
 
 def index(request):
     if request.user.is_authenticated:
-        emails=request.user.email
-        allemails=Allemail.objects.all()
-        for email in allemails:
-            if email.allemails==emails:
-                return render(request, 'index.html')
+        email=request.user.email
+        boarders=azad_boarders.objects.all()
+        for boarder in boarders:
+            if boarder.emails==email:
+                name=boarder.name
+                params={"name":name}
+                return render(request, 'index.html', params)
         logout(request)
+        message="Please login with valid EmailID"
+        params={"message":message}
+        return render(request, 'index.html', params)
+    
     return render(request, 'index.html')
 
+def complain(request):
+    if request.user.is_authenticated:
+        return render(request, 'complain.html')
+
+
+def submit_form(request):
+    if request.method == 'POST' and request.user.is_authenticated :
+        category = request.POST.get('category')
+        room_no = request.POST.get('room_no')
+        complain = request.POST.get('complain')
+        contact_no  = request.POST.get('contact_no')
+        image = request.FILES.get('image')
+        boarder = azad_boarders.objects.get(emails = request.user.email)
+        name=boarder.name
+        email= boarder.emails
+        roll_no = boarder.roll_no
+        now=datetime.now()
+        t_string = now.strftime("%d/%m/%Y %H:%M %p")
+        created_at=t_string
+        register = complaints.objects.create(name=name, roll_no=roll_no, email=email, category=category, contact_no=contact_no, complain=complain, status="pending", room_no=room_no, created_at=created_at, image=image)
+        # Return a response (you can render a template or return a JSON response)
+        # message="Complain submitted successfully!"
+        # params={"message":message,"name":name}
+        messages.info(request, 'Complain submitted successfully')
+        return redirect("/")
+    else:
+        # Handle GET requests or other methods if necessary
+        return HttpResponse('Invalid request method')
+
+def showComplaints(request):
+    pending_complaints = complaints.objects.filter(status="pending")
+    completed_complaints = complaints.objects.filter(status="Completed").order_by("-id")
+    params = {"pending_complaints": pending_complaints, "completed_complaints": completed_complaints}
+    return render(request,'showComplaints.html', params)
+
+def showFullComplain(request, complain_id):
+    complain=complaints.objects.get(id=complain_id)
+    params = {"complain": complain}
+    return render(request,"fullComplain.html", params)
+
+
+def updateStatus(request):
+    if request.method=="POST":
+        id = request.POST.get('id')
+        manager_review = request.POST.get('manager_review')
+        complain = complaints.objects.get(id=id)
+        complain.status="Completed"
+        complain.manager_review=manager_review
+        now=datetime.now()
+        t_string = now.strftime("%d/%m/%Y %H:%M %p")
+        complain.modified_at=t_string
+        complain.save()
+    return redirect("/showComplaints")
+
+def complain_status(request):
+    complains = complaints.objects.filter(email=request.user.email).order_by("-id")
+    print(complains)
+    params={"complains":complains}
+    return render(request, "complain_status.html", params)
 
 def noticeboard(request):
     noticeboard = Notice.objects.all()
@@ -126,5 +211,7 @@ def event(request, eventid):
 
 def custom_logout(request):
     logout(request)
-    return redirect("/")
+    message="Logged out successfully"
+    params={"message":message}
+    return render(request,"index.html", params)
 
