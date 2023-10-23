@@ -14,6 +14,8 @@ from datetime import datetime, timedelta
 from django.contrib import messages
 
 
+allowedEmails=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com"]
+
 # def index(request):
 #     return HttpResponse("Hello, world")
 
@@ -30,7 +32,14 @@ def import_from_excel(request):
 
         return render(request, 'index.html')
 def addBoarders(request):
-    return render(request, 'addBoarders.html') 
+    if request.user.is_authenticated:
+        email=request.user.email
+        if email in allowedEmails:
+            return render(request, 'addBoarders.html')
+    messages.info(request, 'Please login with valid ID to add boarders')
+    return redirect("/")
+    
+     
 
 
 def login(request):
@@ -71,7 +80,7 @@ def submit_form(request):
         now=datetime.now()
         t_string = now.strftime("%d/%m/%Y %H:%M %p")
         created_at=t_string
-        register = complaints.objects.create(name=name, roll_no=roll_no, email=email, category=category, contact_no=contact_no, complain=complain, status="pending", room_no=room_no, created_at=created_at, image=image)
+        register = complaints.objects.create(name=name, roll_no=roll_no, email=email, category=category, contact_no=contact_no, complain=complain, status="pending", room_no=room_no, created_at=created_at, image=image, review="None")
         # Return a response (you can render a template or return a JSON response)
         # message="Complain submitted successfully!"
         # params={"message":message,"name":name}
@@ -82,10 +91,17 @@ def submit_form(request):
         return HttpResponse('Invalid request method')
 
 def showComplaints(request):
-    pending_complaints = complaints.objects.filter(status="pending")
-    completed_complaints = complaints.objects.filter(status="Completed").order_by("-id")
-    params = {"pending_complaints": pending_complaints, "completed_complaints": completed_complaints}
-    return render(request,'showComplaints.html', params)
+    
+    if request.user.is_authenticated:
+        email=request.user.email
+        if email in allowedEmails:
+            pending_complaints = complaints.objects.filter(status="pending")
+            completed_complaints = complaints.objects.filter(status="Completed").order_by("-id")
+            params = {"pending_complaints": pending_complaints, "completed_complaints": completed_complaints}
+            return render(request,'showComplaints.html', params)
+    messages.info(request, 'Please login with valid ID to access complaints')
+    return redirect("/")
+    
 
 def showFullComplain(request, complain_id):
     complain=complaints.objects.get(id=complain_id)
@@ -97,6 +113,8 @@ def updateStatus(request):
     if request.method=="POST":
         id = request.POST.get('id')
         manager_review = request.POST.get('manager_review')
+        if manager_review=="":
+            manager_review="None"
         complain = complaints.objects.get(id=id)
         complain.status="Completed"
         complain.manager_review=manager_review
