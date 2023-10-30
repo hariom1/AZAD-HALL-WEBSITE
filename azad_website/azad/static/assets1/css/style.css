@@ -794,8 +794,8 @@ img {
   display: inline-block;
   vertical-align: middle;
   width: 20px;
-  padding: 30px 50px 30px 30px;
-  left: -30px;
+  padding: 30px 40px 30px 30px;
+  left: -10px;
   top: -2px;
   position: relative;
   margin-right: -15px;
