@@ -7,8 +7,15 @@ body {
   font-family: Tahoma;
   font-size: 1.3rem;
 }
+#description a{
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+#description a:hover{
+  color: rgb(44, 4, 202);
+}
 h1, p {
-  margin: .5em auto;
+  margin: .5rem auto;
   text-align: center;
   color:rgb(57, 56, 56);
 }
@@ -73,4 +80,5 @@ input:focus, textarea:focus, select:focus{
   width: 50%;
   float: right;
 }
+
 

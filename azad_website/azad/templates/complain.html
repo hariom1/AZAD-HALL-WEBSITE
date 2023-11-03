@@ -1,5 +1,6 @@
 {% load static %}
 {% load socialaccount %}
+<!DOCTYPE html>
 <html lang="en">
 
  <!--head-->
@@ -8,16 +9,18 @@
     <title>Complain</title>
     <link rel="stylesheet" href="../static/css/complain.css">
 
-<!--heading and description-->
-    <h1 id="title">Complaint Form</h1>
-    <p id="description">Register your mess and maintenance complain here</p>
+
     </head>
 
 <!--body-->
 <body>
+    <!--heading and description-->
+    <h1 id="title">Complaint Form</h1>
+    
+    <p id="description"><a href="{% url 'complain_status' %}">See previous complaints</a></p>
 
 <!--form-->
-  <form id="survey-form", method='post', action={% url 'submit_form' %} enctype="multipart/form-data">
+  <form id="survey-form", method='post', action="{% url 'submit_form' %}" enctype="multipart/form-data">
     {% csrf_token %}
 
 <fieldset>
