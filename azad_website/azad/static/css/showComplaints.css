@@ -12,9 +12,7 @@
 textarea{
   padding: .2rem;
 }
-a{
-  text-decoration: none;
-}
+
 
 table {
     border: 1px solid #ccc;
@@ -65,7 +63,7 @@ table {
     text-align: center;
   }
  
-  
+
   
   @media screen and (max-width: 800px) {
     table {
@@ -121,7 +119,9 @@ table {
   }
   
   
-  
+  table a{
+    text-decoration: none;
+  }
   
   
   

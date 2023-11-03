@@ -97,7 +97,8 @@ def showComplaints(request):
         if email in allowedEmails:
             pending_complaints = complaints.objects.filter(status="pending")
             completed_complaints = complaints.objects.filter(status="Completed").order_by("-id")
-            params = {"pending_complaints": pending_complaints, "completed_complaints": completed_complaints}
+            ongoing_complaints = complaints.objects.filter(status="Ongoing")
+            params = {"pending_complaints": pending_complaints, "completed_complaints": completed_complaints, "ongoing_complaints": ongoing_complaints}
             return render(request,'showComplaints.html', params)
     messages.info(request, 'Please login with valid ID to access complaints')
     return redirect("/")
@@ -116,7 +117,10 @@ def updateStatus(request):
         if manager_review=="":
             manager_review="None"
         complain = complaints.objects.get(id=id)
-        complain.status="Completed"
+        if(complain.status=="pending"):
+            complain.status="Ongoing"
+        else:
+            complain.status="Completed"
         complain.manager_review=manager_review
         now=datetime.now()
         t_string = now.strftime("%d/%m/%Y %H:%M %p")

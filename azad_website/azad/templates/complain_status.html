@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Complaints</title>
     <link rel="stylesheet" href="../static/css/showComplaints.css">
 </head>
 <body>
@@ -32,11 +32,11 @@
             <td data-label="Created at">{{complain.created_at}}</td>
             <td data-label="Room Number">{{complain.room_no}}</td>
             <td data-label="Contact">{{complain.contact_no}}</td>
-            <td data-label="complain">{{complain.complain}}</td>
+            <td data-label="complain" class="complain">{{complain.complain}}</td>
             <td data-label="Status">{{complain.status}}</td>
             {% if complain.status == "pending" %}
-            <td data-label="Completed_on"></td>
-            <td data-label="review"></td>
+            <td data-label="Completed_on">NA</td>
+            <td data-label="review">None</td>
             {% else %}
             <td data-label="Completed_on">{{complain.modified_at}}</td>
             <td data-label="review">{{complain.manager_review}}</td>
@@ -46,5 +46,9 @@
         {% endfor %} 
         </tbody>
       </table>
+
+      <!-- script to limit length of displayed complain to specified characters -->
+      <!-- add class "complain" to apply -->
+      <script src="../static/js/complain.js"></script>
 </body>
 </html>
