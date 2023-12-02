@@ -32,7 +32,7 @@
             <td data-label="Created at">{{complain.created_at}}</td>
             <td data-label="Room Number">{{complain.room_no}}</td>
             <td data-label="Contact">{{complain.contact_no}}</td>
-            <td data-label="complain" class="complain">{{complain.complain}}</td>
+            <td data-label="complain" class="complain">{{complain.complain}} <a href="{% url 'fullComplain' complain.id %}">Read more</a></td>
             <td data-label="Status">{{complain.status}}</td>
             {% if complain.status == "pending" %}
             <td data-label="Completed_on">NA</td>

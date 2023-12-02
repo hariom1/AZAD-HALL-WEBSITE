@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from openpyxl import load_workbook
 from datetime import datetime, timedelta
 from django.contrib import messages
+from django.core.paginator import Paginator, Page
 
 
 allowedEmails=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com"]
@@ -96,9 +97,12 @@ def showComplaints(request):
         email=request.user.email
         if email in allowedEmails:
             pending_complaints = complaints.objects.filter(status="pending")
+            pending_paginator = Paginator(pending_complaints, 10)
+            current_page_pending = pending_paginator.page(request.GET.get('pending_page', 1))
+
             completed_complaints = complaints.objects.filter(status="Completed").order_by("-id")
             ongoing_complaints = complaints.objects.filter(status="Ongoing")
-            params = {"pending_complaints": pending_complaints, "completed_complaints": completed_complaints, "ongoing_complaints": ongoing_complaints}
+            params = {"pending_complaints": current_page_pending, "completed_complaints": completed_complaints, "ongoing_complaints": ongoing_complaints}
             return render(request,'showComplaints.html', params)
     messages.info(request, 'Please login with valid ID to access complaints')
     return redirect("/")
@@ -114,13 +118,22 @@ def updateStatus(request):
     if request.method=="POST":
         id = request.POST.get('id')
         manager_review = request.POST.get('manager_review')
+        set_status = request.POST.get('set_status')
+        print(set_status)
         if manager_review=="":
             manager_review="None"
         complain = complaints.objects.get(id=id)
-        if(complain.status=="pending"):
-            complain.status="Ongoing"
-        else:
+        if(complain.status=="Ongoing"):
             complain.status="Completed"
+        else:
+            if(set_status=="ongoing"):
+                complain.status="Ongoing"
+            else:
+                complain.status="Completed"
+        # if(complain.status=="pending"):
+        #     complain.status="Ongoing"
+        # else:
+        #     complain.status="Completed"
         complain.manager_review=manager_review
         now=datetime.now()
         t_string = now.strftime("%d/%m/%Y %H:%M %p")
