@@ -171,6 +171,9 @@ def events(request):
     events = Event.objects.all()
     return render(request, 'events.html', {'events': events})
 
+def khoj(request):
+     return render(request, 'khoj.html')
+
 def about(request):
     if (request.method == 'POST'):
         form = ContactForm(request.POST)
