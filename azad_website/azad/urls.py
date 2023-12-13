@@ -26,6 +26,7 @@ urlpatterns = [
     path('updateStatus', views.updateStatus, name='updateStatus'),
     path('complain_status', views.complain_status, name='complain_status'),
     path('fullComplain/<int:complain_id>', views.showFullComplain, name='fullComplain'),
+    path('khoj', views.khoj, name='khoj'),
 ]
 
 if settings.DEBUG:  
