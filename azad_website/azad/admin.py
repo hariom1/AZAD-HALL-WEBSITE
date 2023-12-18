@@ -13,6 +13,8 @@ admin.site.register(Contact)
 admin.site.register(Para)
 admin.site.register(azad_boarders)
 admin.site.register(complaints)
+admin.site.register(book)
+admin.site.register(requestedBook)
 # admin.site.register(Contact)
 
 

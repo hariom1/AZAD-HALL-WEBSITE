@@ -24,6 +24,26 @@ class complaints(models.Model):
     manager_review=models.CharField(max_length=500, null=True)
     image = models.ImageField(upload_to='complain_images', null=True)  # You can specify the upload path
 
+class book(models.Model):
+    title=models.CharField(max_length=50)
+    author=models.CharField(max_length=50)
+    department=models.CharField(max_length=20, null=True)
+    shelf=models.IntegerField(null=True)
+    quantity=models.IntegerField()
+    available=models.IntegerField()
+
+class requestedBook(models.Model):
+    title=models.CharField(max_length=50)
+    author=models.CharField(max_length=50)
+    department=models.CharField(max_length=20, null=True)
+    shelf=models.IntegerField(null=True)
+    studentName=models.CharField(max_length=50)
+    studentRoll_no=models.CharField(max_length=15)
+    email=models.EmailField()
+    created_at=models.CharField(max_length=20)
+    status=models.CharField(max_length=20)
+    bookID=models.IntegerField(null=True)
+
 class Event(models.Model):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=200)
