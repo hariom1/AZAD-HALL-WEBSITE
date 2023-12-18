@@ -175,10 +175,13 @@ def events(request):
 def khoj(request):
      return render(request, 'khoj.html')
 
-def library(request):
+def library(request, searchedBooks=None, str=None):
     if request.user.is_authenticated:
-        books = book.objects.all()
-        return render(request, 'library.html', {'books' : books})
+        if searchedBooks:
+            books=searchedBooks
+        else:
+            books = book.objects.all()
+        return render(request, 'library.html', {'books':books, 'searchedString':str})
     messages.info(request, 'Please login with valid ID to access library')
     return redirect("/")
 
@@ -230,6 +233,20 @@ def checkIn(request):
         RequestedBook.delete()
         return redirect("/checkedOutBooks")
 
+def search(request):
+    if request.method=="POST":
+        str = request.POST.get('search')
+        
+        if str:
+            books = book.objects.filter(
+                models.Q(title__icontains=str) | models.Q(author__icontains=str) | models.Q(department__icontains=str) 
+            )
+            if books:
+                return library(request, books, str)
+
+
+    books = book.objects.all()
+    return redirect("/library")
 
 
 def about(request):

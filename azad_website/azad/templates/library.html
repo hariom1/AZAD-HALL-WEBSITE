@@ -968,8 +968,16 @@
                         </div>
                     </aside>
                     <div class="startups">
-                        <div class="search-container row"><form><input type="search" name="" id="search-box"
+                        <div class="search-container row">
+                            <form action="/search" method="post">
+                                {% csrf_token %}
+                                {% if searchedString %}
+                                <input type="search" name="search" id="search-box"
+                                placeholder="Search for desired book" value={{searchedString}}>
+                                {% else %}
+                                <input type="search" name="search" id="search-box"
                                 placeholder="Search for desired book" value="">
+                                {% endif %}
                         <button type="submit">Search</button>
                         </form>
                         </div>

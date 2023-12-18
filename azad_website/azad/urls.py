@@ -32,6 +32,7 @@ urlpatterns = [
     path('checkedOutBooks', views.checkedOutBooks, name='checkedOutBooks'),
     path('approve', views.approve, name='approve'),
     path('checkIn', views.checkIn, name='checkIn'),
+    path('search', views.search, name='search'),
 ]
 
 if settings.DEBUG:  
