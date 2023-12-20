@@ -27,6 +27,12 @@ urlpatterns = [
     path('complain_status', views.complain_status, name='complain_status'),
     path('fullComplain/<int:complain_id>', views.showFullComplain, name='fullComplain'),
     path('khoj', views.khoj, name='khoj'),
+    path('library', views.library, name='library'),
+    path('checkout', views.checkout, name='checkout'),
+    path('checkedOutBooks', views.checkedOutBooks, name='checkedOutBooks'),
+    path('approve', views.approve, name='approve'),
+    path('checkIn', views.checkIn, name='checkIn'),
+    path('search', views.search, name='search'),
 ]
 
 if settings.DEBUG:  

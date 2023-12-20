@@ -15,7 +15,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, Page
 
 
-allowedEmails=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com"]
+allowedEmails=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com", "sg06959.sgsg@gmail.com"]
 
 # def index(request):
 #     return HttpResponse("Hello, world")
@@ -32,6 +32,7 @@ def import_from_excel(request):
             azad_boarders.objects.create(name=name, roll_no=roll_no, emails=email, contact=number)
 
         return render(request, 'index.html')
+    
 def addBoarders(request):
     if request.user.is_authenticated:
         email=request.user.email
@@ -173,6 +174,80 @@ def events(request):
 
 def khoj(request):
      return render(request, 'khoj.html')
+
+def library(request, searchedBooks=None, str=None):
+    if request.user.is_authenticated:
+        if searchedBooks:
+            books=searchedBooks
+        else:
+            books = book.objects.all()
+        return render(request, 'library.html', {'books':books, 'searchedString':str})
+    messages.info(request, 'Please login with valid ID to access library')
+    return redirect("/")
+
+def checkout(request):
+    if request.method=="POST":
+        id = request.POST.get('id')
+        Book = book.objects.get(id = id)
+        boarder = azad_boarders.objects.get(emails = request.user.email)
+        now=datetime.now()
+        t_string = now.strftime("%d/%m/%Y %H:%M %p")
+        requestedBook.objects.create(title=Book.title, author=Book.author, department=Book.department, shelf=Book.shelf, studentName=boarder.name, studentRoll_no=boarder.roll_no, email=boarder.emails, created_at=t_string, status="requested", bookID=id)
+        x=Book.available
+        Book.available = x-1
+        Book.save()
+        # print(book)
+        # messages.info(request, "Request submitted successfully")
+        return redirect("/library")
+
+def checkedOutBooks(request):
+    requestedBooks = requestedBook.objects.filter(status="requested")
+    requestedBooks_paginator = Paginator(requestedBooks, 10)
+    current_page_requestedBooks = requestedBooks_paginator.page(request.GET.get('requestedBooks_page', 1))
+
+    checkedOutBooks = requestedBook.objects.filter(status="checkedOut")
+    checkedOutBooks_paginator = Paginator(checkedOutBooks, 10)
+    current_page_checkedOutBooks = checkedOutBooks_paginator.page(request.GET.get('checkedOutBooks_page', 1))
+
+    return render(request, "checkedOutBooks.html", {"requestedBooks":current_page_requestedBooks,"checkedOutBooks":current_page_checkedOutBooks,})
+
+def approve(request):
+    if request.method=="POST":
+        id = request.POST.get('id')
+        Book = requestedBook.objects.get(id = id)
+        Book.status="checkedOut"
+        now=datetime.now()
+        t_string = now.strftime("%d/%m/%Y %H:%M %p")
+        Book.created_at=t_string
+        Book.save() 
+        return redirect("/checkedOutBooks")
+
+def checkIn(request):
+    if request.method=="POST":
+        id = request.POST.get('id')
+        RequestedBook = requestedBook.objects.get(id = id)
+        Book=book.objects.get(id = RequestedBook.bookID)
+        Book.available+=1
+        Book.save()
+
+        RequestedBook.delete()
+        return redirect("/checkedOutBooks")
+
+def search(request):
+    if request.method=="POST":
+        str = request.POST.get('search')
+        
+        if str:
+            books = book.objects.filter(
+                models.Q(title__icontains=str) | models.Q(author__icontains=str) | models.Q(department__icontains=str) 
+            )
+            if books:
+                return library(request, books, str)
+
+
+    books = book.objects.all()
+    return redirect("/library")
+
 
 def about(request):
     if (request.method == 'POST'):

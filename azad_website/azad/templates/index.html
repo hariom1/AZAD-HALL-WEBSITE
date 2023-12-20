@@ -349,6 +349,7 @@
                             <a style="margin-bottom: 3px;" href="{% url 'achievements' %}" class="btn btn-default next">Achievements</a>
                             <a style="margin-bottom: 3px;" href="{% url 'about' %}" class="btn btn-default next">About</a>
                             {% if user.is_authenticated %}
+                            <a style="margin-bottom: 3px;" href="{% url 'library' %}" class="btn btn-default next">Library</a>
                             <a style="margin-bottom: 3px;" href="{% url 'complain' %}" class="btn btn-default next">Complain</a>
                             {% comment %} <a style="margin-bottom: 3px;" href="{% url 'custom_logout' %}" class="btn btn-default next">Logout</a> {% endcomment %}
                             <p style="margin: 0;font-size: 16px;margin-bottom: 10px;color: white;">  Welcome, {{ name }}</p>
