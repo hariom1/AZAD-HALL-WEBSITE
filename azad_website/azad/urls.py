@@ -33,6 +33,10 @@ urlpatterns = [
     path('approve', views.approve, name='approve'),
     path('checkIn', views.checkIn, name='checkIn'),
     path('search', views.search, name='search'),
+    path('importBooksFromExcel', views.importBooksFromExcel, name='importBooksFromExcel'),
+    path('addBooks', views.addBooks, name='addBooks'),
+    path('previousBookRequests', views.previousBookRequests, name='previousBookRequests'),
+    path('cancelBookRequest', views.cancelBookRequest, name='cancelBookRequest'),
 ]
 
 if settings.DEBUG:  

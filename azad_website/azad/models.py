@@ -25,12 +25,12 @@ class complaints(models.Model):
     image = models.ImageField(upload_to='complain_images', null=True)  # You can specify the upload path
 
 class book(models.Model):
-    title=models.CharField(max_length=50)
-    author=models.CharField(max_length=50)
+    title=models.CharField(max_length=50, null=True)
+    author=models.CharField(max_length=50, null=True)
     department=models.CharField(max_length=20, null=True)
     shelf=models.IntegerField(null=True)
-    quantity=models.IntegerField()
-    available=models.IntegerField()
+    quantity=models.IntegerField(null=True)
+    available=models.IntegerField(null=True)
 
 class requestedBook(models.Model):
     title=models.CharField(max_length=50)

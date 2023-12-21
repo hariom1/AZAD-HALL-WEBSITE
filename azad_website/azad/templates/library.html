@@ -1,3 +1,6 @@
+{% load static %}
+{% load socialaccount %}
+
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +19,7 @@
     <link rel="preload" href="../static/css/library/dab1868370809cf7.css" as="style" crossorigin="">
     <link rel="stylesheet" href="../static/css/library/dab1868370809cf7.css" crossorigin="" data-n-g="">
     <link rel="stylesheet" href="../static/css/library/library.css">
+    <link rel="stylesheet" href="../static/css/alert.css">
 </head>
 
 <body>
@@ -52,14 +56,14 @@
                     }
                 </style><span id="notification-button" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNotification" aria-controls="offcanvasRight"
-                    class="MuiBadge-root css-1rzb3uu"><svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                    {% comment %} class="MuiBadge-root css-1rzb3uu">{% comment %}<svg stroke="currentColor" fill="currentColor" stroke-width="0"
                         viewBox="0 0 16 16" style="color:black;font-size:1.5rem" height="1em" width="1em"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z">
                         </path>
-                    </svg>
-                    <style data-emotion="css 17ypp3w">
+                    </svg> {% endcomment %}
+                    {% comment %} <style data-emotion="css 17ypp3w">
                         .css-17ypp3w {
                             display: -webkit-box;
                             display: -webkit-flex;
@@ -113,10 +117,12 @@
                             -ms-transform: scale(0) translate(50%, -50%);
                             transform: scale(0) translate(50%, -50%);
                         }
-                    </style><span
+                    </style> {% endcomment %}
+                    
+                    <span
                         class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-17ypp3w"></span>
                 </span>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNotification"
+                {% comment %} <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNotification"
                     aria-labelledby="offcanvasRightLabel">
                     <div class="offcanvas-header"><button type="button" class="btn-close text-reset"
                             data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
@@ -124,10 +130,10 @@
                         <h5>Notifications</h5>
                         <hr class="dropdown-divider" role="separator">
                     </div>
-                </div>
+                </div> {% endcomment %}
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown discover"><a class="nav-link " href="#" id="navbarDropdown"
+                        {% comment %} <li class="nav-item dropdown discover"><a class="nav-link " href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <h3>Discover</h3><svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                     viewBox="0 0 24 24" font-size="2rem" height="1em" width="1em"
@@ -638,9 +644,9 @@
                                     </path>
                                 </svg>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <ul class="dropdown-container">
-                                    <li class="dropdown-subcontainer"><a class="dropdown-item"
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown"> {% endcomment %}
+                                {% comment %} <ul class="dropdown-container">
+                                    {% comment %} <li class="dropdown-subcontainer"><a class="dropdown-item"
                                             href="https://i3f-iitbhu.org/" rel="noreferrer" target="_blank"><svg
                                                 stroke="currentColor" fill="currentColor" stroke-width="0" version="1"
                                                 viewBox="0 0 48 48" enable-background="new 0 0 48 48" font-size="2rem"
@@ -695,8 +701,8 @@
                                                 <p>An internal makerspace “Internet of Things” <br>- focused incubator
                                                 </p>
                                             </div>
-                                        </a></li>
-                                    <li class="dropdown-subcontainer"><a class="dropdown-item"
+                                        </a></li> {% endcomment %}
+                                    {% comment %} <li class="dropdown-subcontainer"><a class="dropdown-item"
                                             href="https://i3f-iitbhu.org/" rel="noreferrer" target="_blank"><svg
                                                 stroke="currentColor" fill="currentColor" stroke-width="0" version="1"
                                                 viewBox="0 0 48 48" enable-background="new 0 0 48 48" font-size="2rem"
@@ -752,8 +758,8 @@
                                                 <p>Technology Innovation Hub for “Data Analytics<br> and Predictive
                                                     Technologies”</p>
                                             </div>
-                                        </a></li>
-                                    <li class="dropdown-subcontainer"><a class="dropdown-item"
+                                        </a></li> {% endcomment %}
+                                    {% comment %} <li class="dropdown-subcontainer"><a class="dropdown-item"
                                             href="https://i3f-iitbhu.org/" rel="noreferrer" target="_blank"><svg
                                                 stroke="currentColor" fill="currentColor" stroke-width="0" version="1"
                                                 viewBox="0 0 48 48" enable-background="new 0 0 48 48" font-size="2rem"
@@ -809,20 +815,26 @@
                                                 <h4>Innovation<br>&amp; Start-up Policy IIT BHU</h4>
                                                 <p>Official Startup Policy of IIT BHU</p>
                                             </div>
-                                        </a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown contact-nav"><a class="nav-link" href="/team">
-                                <h3>Team</h3>
+                                        </a></li> 
+                                </ul> {% endcomment %}
+                            {% comment %} </div>
+                        </li> {% endcomment %}
+                        <li class="nav-item dropdown contact-nav"><a class="nav-link" href="/">
+                                <h3>Home</h3>
                             </a></li>
-                        <li class="nav-item dropdown startups-nav"><a class="nav-link" href="/startups">
-                                <h3>Startups</h3>
+                            <li class="nav-item dropdown contact-nav"><a class="nav-link" href="/previousBookRequests">
+                                <h3>Previous Book Requests</h3>
                             </a></li>
-                        <li class="nav-item dropdown contact-nav"><a class="nav-link" href="/contacts">
-                                <h3>Contact</h3>
+                        <li class="nav-item dropdown startups-nav"><a class="nav-link" href="/khoj">
+                                <h3>Khoj</h3>
                             </a></li>
-                        <div class="notification dropdown"><button type="button" id="react-aria-:R31kt6:"
+                        <li class="nav-item dropdown contact-nav"><a class="nav-link" href="/complain">
+                                <h3>Mess Complain</h3>
+                            </a></li>
+                            <li class="nav-item dropdown contact-nav"><a class="nav-link" href="/achievements">
+                                <h3>Achievements</h3>
+                            </a></li>
+                        {% comment %} <div class="notification dropdown"><button type="button" id="react-aria-:R31kt6:"
                                 aria-expanded="false"
                                 style="width:fit-content;background-color:#f8f9fa;border:none;padding:0px;margin:0px"
                                 class="dropdown-toggle btn btn-primary">
@@ -903,7 +915,7 @@
                                     </style><span
                                         class="MuiBadge-badge MuiBadge-standard MuiBadge-invisible MuiBadge-anchorOriginTopRight MuiBadge-anchorOriginTopRightRectangular MuiBadge-overlapRectangular MuiBadge-colorError css-17ypp3w"></span>
                                 </span>
-                            </button></div>
+                            </button></div> {% endcomment %}
                     </ul>
                 </div><button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -912,13 +924,14 @@
             </div>
         </nav>
         <div>
+           
             <div class="body container-fluid">
                 <div style="height:fit-content;margin-bottom:50px" class="header row">
                     <h1 style="margin:20px auto 0px auto;font-size:3rem;color:black;font-weight:bold;text-align:center">
-                        AZAD HALL LIBRARY</h1>
+                        HALL LIBRARY</h1>
                 </div>
                 <div style="display:flex;justify-content:left;gap:20px">
-                    <aside style="position:sticky;top:5rem;display:block !important;height:calc(96vh - 4rem)">
+                  {% comment %} <aside style="position:sticky;top:5rem;display:block !important;height:calc(96vh - 4rem)">
                         <div class="filter-container" style="width:fit-content">
                             <div class="row">
                                 <h2>Filter out the results <svg stroke="currentColor" fill="currentColor"
@@ -966,7 +979,7 @@
                                 </div>
                             </div>
                         </div>
-                    </aside>
+                    </aside> {% endcomment %}
                     <div class="startups">
                         <div class="search-container row">
                             <form action="/search" method="post">
@@ -981,6 +994,19 @@
                         <button type="submit">Search</button>
                         </form>
                         </div>
+                        <div class="complain_navigation">
+                            {% if books.has_previous %}
+                      <a href="?books_page={{ books.previous_page_number }}">Previous</a>
+                    {% endif %}
+                    <span>
+                        {% if books.number %}
+                            Page {{ books.number }} of {{ books.paginator.num_pages }}.
+                        {% endif %}
+                    </span>
+                    {% if books.has_next %}
+                      <a href="?books_page={{ books.next_page_number }}">Next</a>
+                    {% endif %}
+                          </div>
                         <div class="table">
 
                             <table class="responstable">
