@@ -30,9 +30,27 @@ def import_from_excel(request):
         for row in ws.iter_rows(values_only=True):
             roll_no, name, email, number = row
             azad_boarders.objects.create(name=name, roll_no=roll_no, emails=email, contact=number)
-
         return render(request, 'index.html')
     
+def importBooksFromExcel(request):
+    if request.method == 'POST':
+        excel_file = request.FILES['excel_file']
+        wb = load_workbook(excel_file)
+        ws = wb.active
+        for row in ws.iter_rows(values_only=True):
+            # print(row)
+            book.objects.create(title=row[0], author=row[1], department=row[2], shelf=row[3], quantity=row[4], available=row[4])
+
+        return render(request, 'index.html')
+
+def addBooks(request):
+    if request.user.is_authenticated:
+        email=request.user.email
+        if email in allowedEmails:
+            return render(request, 'addBooks.html')
+    messages.info(request, 'Please login with valid ID to add boarders')
+    return redirect("/")
+
 def addBoarders(request):
     if request.user.is_authenticated:
         email=request.user.email
@@ -179,9 +197,12 @@ def library(request, searchedBooks=None, str=None):
     if request.user.is_authenticated:
         if searchedBooks:
             books=searchedBooks
+            return render(request, 'library.html', {'books':books, 'searchedString':str})
         else:
             books = book.objects.all()
-        return render(request, 'library.html', {'books':books, 'searchedString':str})
+        books_paginator = Paginator(books, 10)
+        current_page_books = books_paginator.page(request.GET.get('books_page', 1))
+        return render(request, 'library.html', {'books':current_page_books, 'searchedString':str})
     messages.info(request, 'Please login with valid ID to access library')
     return redirect("/")
 
@@ -211,6 +232,18 @@ def checkedOutBooks(request):
 
     return render(request, "checkedOutBooks.html", {"requestedBooks":current_page_requestedBooks,"checkedOutBooks":current_page_checkedOutBooks,})
 
+def previousBookRequests(request):
+    requestedBooks = requestedBook.objects.filter(status="requested", email=request.user.email)
+    requestedBooks_paginator = Paginator(requestedBooks, 10)
+    current_page_requestedBooks = requestedBooks_paginator.page(request.GET.get('requestedBooks_page', 1))
+
+    checkedOutBooks = requestedBook.objects.filter(status="checkedOut", email=request.user.email)
+    checkedOutBooks_paginator = Paginator(checkedOutBooks, 10)
+    current_page_checkedOutBooks = checkedOutBooks_paginator.page(request.GET.get('checkedOutBooks_page', 1))
+
+    return render(request, "previousBookRequests.html", {"requestedBooks":current_page_requestedBooks,"checkedOutBooks":current_page_checkedOutBooks,})
+
+
 def approve(request):
     if request.method=="POST":
         id = request.POST.get('id')
@@ -232,6 +265,15 @@ def checkIn(request):
 
         RequestedBook.delete()
         return redirect("/checkedOutBooks")
+
+def cancelBookRequest(request):
+    id = request.POST.get('id')
+    RequestedBook = requestedBook.objects.get(id = id)
+    Book=book.objects.get(id = RequestedBook.bookID)
+    Book.available+=1
+    Book.save()
+    RequestedBook.delete()
+    return redirect("/previousBookRequests")
 
 def search(request):
     if request.method=="POST":
