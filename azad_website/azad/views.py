@@ -16,6 +16,7 @@ from django.core.paginator import Paginator, Page
 
 
 allowedEmails=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com", "sg06959.sgsg@gmail.com"]
+allowedEmailsLibrary=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com", "sg06959.sgsg@gmail.com"]
 
 # def index(request):
 #     return HttpResponse("Hello, world")
@@ -202,6 +203,9 @@ def library(request, searchedBooks=None, str=None):
             books = book.objects.all()
         books_paginator = Paginator(books, 10)
         current_page_books = books_paginator.page(request.GET.get('books_page', 1))
+        # message=None
+        # if checkout:
+        #     message="Request submitted successfully"
         return render(request, 'library.html', {'books':current_page_books, 'searchedString':str})
     messages.info(request, 'Please login with valid ID to access library')
     return redirect("/")
@@ -222,49 +226,56 @@ def checkout(request):
         return redirect("/library")
 
 def checkedOutBooks(request):
-    requestedBooks = requestedBook.objects.filter(status="requested")
-    requestedBooks_paginator = Paginator(requestedBooks, 10)
-    current_page_requestedBooks = requestedBooks_paginator.page(request.GET.get('requestedBooks_page', 1))
+    if request.user.is_authenticated and request.user.email in allowedEmailsLibrary:
+        requestedBooks = requestedBook.objects.filter(status="requested")
+        requestedBooks_paginator = Paginator(requestedBooks, 10)
+        current_page_requestedBooks = requestedBooks_paginator.page(request.GET.get('requestedBooks_page', 1))
 
-    checkedOutBooks = requestedBook.objects.filter(status="checkedOut")
-    checkedOutBooks_paginator = Paginator(checkedOutBooks, 10)
-    current_page_checkedOutBooks = checkedOutBooks_paginator.page(request.GET.get('checkedOutBooks_page', 1))
+        checkedOutBooks = requestedBook.objects.filter(status="checkedOut")
+        checkedOutBooks_paginator = Paginator(checkedOutBooks, 10)
+        current_page_checkedOutBooks = checkedOutBooks_paginator.page(request.GET.get('checkedOutBooks_page', 1))
 
-    return render(request, "checkedOutBooks.html", {"requestedBooks":current_page_requestedBooks,"checkedOutBooks":current_page_checkedOutBooks,})
+        return render(request, "checkedOutBooks.html", {"requestedBooks":current_page_requestedBooks,"checkedOutBooks":current_page_checkedOutBooks,})
+    messages.info(request, 'Please login with valid ID to access library records')
+    return redirect("/")
 
 def previousBookRequests(request):
-    requestedBooks = requestedBook.objects.filter(status="requested", email=request.user.email)
-    requestedBooks_paginator = Paginator(requestedBooks, 10)
-    current_page_requestedBooks = requestedBooks_paginator.page(request.GET.get('requestedBooks_page', 1))
+    if request.user.is_authenticated:
+        requestedBooks = requestedBook.objects.filter(status="requested", email=request.user.email)
+        requestedBooks_paginator = Paginator(requestedBooks, 10)
+        current_page_requestedBooks = requestedBooks_paginator.page(request.GET.get('requestedBooks_page', 1))
 
-    checkedOutBooks = requestedBook.objects.filter(status="checkedOut", email=request.user.email)
-    checkedOutBooks_paginator = Paginator(checkedOutBooks, 10)
-    current_page_checkedOutBooks = checkedOutBooks_paginator.page(request.GET.get('checkedOutBooks_page', 1))
+        checkedOutBooks = requestedBook.objects.filter(status="checkedOut", email=request.user.email)
+        checkedOutBooks_paginator = Paginator(checkedOutBooks, 10)
+        current_page_checkedOutBooks = checkedOutBooks_paginator.page(request.GET.get('checkedOutBooks_page', 1))
 
-    return render(request, "previousBookRequests.html", {"requestedBooks":current_page_requestedBooks,"checkedOutBooks":current_page_checkedOutBooks,})
-
+        return render(request, "previousBookRequests.html", {"requestedBooks":current_page_requestedBooks,"checkedOutBooks":current_page_checkedOutBooks,})
+    messages.info(request, 'Please login with valid ID to access library records')
+    return redirect("/")
 
 def approve(request):
-    if request.method=="POST":
-        id = request.POST.get('id')
-        Book = requestedBook.objects.get(id = id)
-        Book.status="checkedOut"
-        now=datetime.now()
-        t_string = now.strftime("%d/%m/%Y %H:%M %p")
-        Book.created_at=t_string
-        Book.save() 
-        return redirect("/checkedOutBooks")
+    if request.user.is_authenticated and request.user.email in allowedEmailsLibrary:
+        if request.method=="POST":
+            id = request.POST.get('id')
+            Book = requestedBook.objects.get(id = id)
+            Book.status="checkedOut"
+            now=datetime.now()
+            t_string = now.strftime("%d/%m/%Y %H:%M %p")
+            Book.created_at=t_string
+            Book.save() 
+            return redirect("/checkedOutBooks")
 
 def checkIn(request):
-    if request.method=="POST":
-        id = request.POST.get('id')
-        RequestedBook = requestedBook.objects.get(id = id)
-        Book=book.objects.get(id = RequestedBook.bookID)
-        Book.available+=1
-        Book.save()
+    if request.user.is_authenticated and request.user.email in allowedEmailsLibrary:
+        if request.method=="POST":
+            id = request.POST.get('id')
+            RequestedBook = requestedBook.objects.get(id = id)
+            Book=book.objects.get(id = RequestedBook.bookID)
+            Book.available+=1
+            Book.save()
 
-        RequestedBook.delete()
-        return redirect("/checkedOutBooks")
+            RequestedBook.delete()
+            return redirect("/checkedOutBooks")
 
 def cancelBookRequest(request):
     id = request.POST.get('id')
