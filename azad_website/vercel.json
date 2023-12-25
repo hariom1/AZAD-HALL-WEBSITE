@@ -21,7 +21,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "azad_website/wsgi.py"
+        "dest": "/azad_website/wsgi.py"
       }
     ]
 }
