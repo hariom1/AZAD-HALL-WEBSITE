@@ -8,17 +8,18 @@ class azad_boarders(models.Model):
     name=models.CharField(max_length=50)
     emails=models.EmailField()
     contact=models.CharField(max_length=12, null=True)
+    books=models.IntegerField(null=True)
     
 class complaints(models.Model):
     name=models.CharField(max_length=50)
     roll_no=models.CharField(max_length=15)
-    category = models.CharField(max_length=20, default="mess")
+    category = models.CharField(max_length=20)
     email=models.EmailField()
     contact_no=models.CharField(max_length=12, null=True)
     room_no=models.CharField(max_length=5)
     complain=models.CharField(max_length=500)
     status=models.CharField(max_length=10)
-    review=models.CharField(max_length=250, default=None,null=True)
+    review=models.CharField(max_length=250, null=True)
     created_at=models.CharField(max_length=20)
     modified_at=models.CharField(max_length=20)
     manager_review=models.CharField(max_length=500, null=True)
@@ -48,7 +49,7 @@ class Event(models.Model):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='media/', default='static/images/logo/logo.svg')
+    image = models.ImageField(upload_to='event_images', default='static/images/logo/logo.svg')
     date = models.DateTimeField(default=datetime.now())
 
     def __str__(self):

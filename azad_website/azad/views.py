@@ -30,7 +30,7 @@ def import_from_excel(request):
 
         for row in ws.iter_rows(values_only=True):
             roll_no, name, email, number = row
-            azad_boarders.objects.create(name=name, roll_no=roll_no, emails=email, contact=number)
+            azad_boarders.objects.create(name=name, roll_no=roll_no, emails=email, contact=number, books=0)
         return render(request, 'index.html')
     
 def importBooksFromExcel(request):
@@ -201,7 +201,7 @@ def library(request, searchedBooks=None, str=None):
             return render(request, 'library.html', {'books':books, 'searchedString':str})
         else:
             books = book.objects.all()
-        books_paginator = Paginator(books, 10)
+        books_paginator = Paginator(books, 30)
         current_page_books = books_paginator.page(request.GET.get('books_page', 1))
         # message=None
         # if checkout:
@@ -215,14 +215,22 @@ def checkout(request):
         id = request.POST.get('id')
         Book = book.objects.get(id = id)
         boarder = azad_boarders.objects.get(emails = request.user.email)
-        now=datetime.now()
-        t_string = now.strftime("%d/%m/%Y %H:%M %p")
-        requestedBook.objects.create(title=Book.title, author=Book.author, department=Book.department, shelf=Book.shelf, studentName=boarder.name, studentRoll_no=boarder.roll_no, email=boarder.emails, created_at=t_string, status="requested", bookID=id)
-        x=Book.available
-        Book.available = x-1
-        Book.save()
+        if(boarder.books<2):
+            now=datetime.now()
+            boarder.books+=1
+            t_string = now.strftime("%d/%m/%Y %H:%M %p")
+            requestedBook.objects.create(title=Book.title, author=Book.author, department=Book.department, shelf=Book.shelf, studentName=boarder.name, studentRoll_no=boarder.roll_no, email=boarder.emails, created_at=t_string, status="requested", bookID=id)
+            x=Book.available
+            Book.available = x-1
+            Book.save()
+            boarder.save()
+        else:
+            messages.info(request, 'You can only apply for 2 books at a time')
+            return redirect("/library")
+
         # print(book)
         # messages.info(request, "Request submitted successfully")
+        messages.info(request, 'Request submitted successfully')
         return redirect("/library")
 
 def checkedOutBooks(request):
@@ -273,13 +281,18 @@ def checkIn(request):
             Book=book.objects.get(id = RequestedBook.bookID)
             Book.available+=1
             Book.save()
-
+            boarder=azad_boarders.objects.get(emails=RequestedBook.email)
+            boarder.books-=1
+            boarder.save()
             RequestedBook.delete()
             return redirect("/checkedOutBooks")
 
 def cancelBookRequest(request):
     id = request.POST.get('id')
     RequestedBook = requestedBook.objects.get(id = id)
+    boarder=azad_boarders.objects.get(emails=RequestedBook.email)
+    boarder.books-=1
+    boarder.save()
     Book=book.objects.get(id = RequestedBook.bookID)
     Book.available+=1
     Book.save()
@@ -296,9 +309,13 @@ def search(request):
             )
             if books:
                 return library(request, books, str)
-
+            else:
+                books = book.objects.all()
+                messages.info(request, 'No books found')
+                return redirect("/library")
 
     books = book.objects.all()
+    # messages.info(request, 'No books found')
     return redirect("/library")
 
 
