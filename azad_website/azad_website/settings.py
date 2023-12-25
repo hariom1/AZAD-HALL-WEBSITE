@@ -146,13 +146,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# looks for static files apart from static folder
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'azad/demos')
-]
-
-# all static files will be collected here after collectstatic
-STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'azad/static/media')
