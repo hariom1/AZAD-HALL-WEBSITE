@@ -31,8 +31,8 @@
             <td data-label="review">{{complain.manager_review}}</td>
             
             {% endif %}
-            {% if complain.image %}
-            <td data-label="image" ><img id="image" src="{{ complain.image.url }}" alt=""></td>
+            {% if complain.image_link %}
+            <td data-label="image link" ><a href={{complain.image_link}} target="blank">Image</a></td>
             {% endif %}
           </tr>
         </tbody>

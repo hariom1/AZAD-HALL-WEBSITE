@@ -23,7 +23,7 @@ class complaints(models.Model):
     created_at=models.CharField(max_length=20)
     modified_at=models.CharField(max_length=20)
     manager_review=models.CharField(max_length=500, null=True)
-    image = models.ImageField(upload_to='complain_images', null=True)  # You can specify the upload path
+    image_link = models.URLField(null=True)
 
 class book(models.Model):
     title=models.CharField(max_length=50, null=True)

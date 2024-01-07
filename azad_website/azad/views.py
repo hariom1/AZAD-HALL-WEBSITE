@@ -93,7 +93,8 @@ def submit_form(request):
         room_no = request.POST.get('room_no')
         complain = request.POST.get('complain')
         contact_no  = request.POST.get('contact_no')
-        image = request.FILES.get('image')
+        # image = request.FILES.get('image')
+        image_link = request.POST.get('image')
         boarder = azad_boarders.objects.get(emails = request.user.email)
         name=boarder.name
         email= boarder.emails
@@ -101,7 +102,7 @@ def submit_form(request):
         now=datetime.now()
         t_string = now.strftime("%d/%m/%Y %H:%M %p")
         created_at=t_string
-        register = complaints.objects.create(name=name, roll_no=roll_no, email=email, category=category, contact_no=contact_no, complain=complain, status="pending", room_no=room_no, created_at=created_at, image=image, review="None")
+        register = complaints.objects.create(name=name, roll_no=roll_no, email=email, category=category, contact_no=contact_no, complain=complain, status="pending", room_no=room_no, created_at=created_at, image_link=image_link, review="None")
         # Return a response (you can render a template or return a JSON response)
         # message="Complain submitted successfully!"
         # params={"message":message,"name":name}
@@ -135,9 +136,10 @@ def showComplaints(request):
     
 
 def showFullComplain(request, complain_id):
-    complain=complaints.objects.get(id=complain_id)
-    params = {"complain": complain}
-    return render(request,"fullComplain.html", params)
+    if request.user.is_authenticated:
+        complain=complaints.objects.get(id=complain_id)
+        params = {"complain": complain}
+        return render(request,"fullComplain.html", params)
 
 
 def updateStatus(request):
@@ -168,10 +170,11 @@ def updateStatus(request):
     return redirect("/showComplaints")
 
 def complain_status(request):
-    complains = complaints.objects.filter(email=request.user.email).order_by("-id")
-    print(complains)
-    params={"complains":complains}
-    return render(request, "complain_status.html", params)
+    if request.user.is_authenticated:
+        complains = complaints.objects.filter(email=request.user.email).order_by("-id")
+        print(complains)
+        params={"complains":complains}
+        return render(request, "complain_status.html", params)
 
 def noticeboard(request):
     noticeboard = Notice.objects.all()
