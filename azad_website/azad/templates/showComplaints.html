@@ -71,7 +71,19 @@
       
 
       <table id="ongoing_complaints">
-        <caption><h2>COMPLAINTS IN PROGRESS</h2><a href="#completed_complaints">Go to Completed complaints</a>  |  <a href="#pending_complaints">Go to Submitted complaints</a></caption>
+        <caption><h2>COMPLAINTS IN PROGRESS</h2>
+          <div class="complain_navigation">
+            {% if ongoing_complaints.has_previous %}
+      <a href="?ongoing_page={{ ongoing_complaints.previous_page_number }}">Previous</a>
+    {% endif %}
+    <span>
+      Page {{ ongoing_complaints.number }} of {{ ongoing_complaints.paginator.num_pages }}.
+    </span>
+    {% if ongoing_complaints.has_next %}
+      <a href="?ongoing_page={{ ongoing_complaints.next_page_number }}">Next</a>
+    {% endif %}
+          </div>
+          <a href="#completed_complaints">Go to Completed complaints</a>  |  <a href="#pending_complaints">Go to Submitted complaints</a></caption>
         <thead>
           <tr>
             <th scope="col" id="id">ID</th>
@@ -110,7 +122,19 @@
       </table>
 
       <table id="completed_complaints">
-        <caption><h2>COMPLETED COMPLAINTS</h2><a href="#ongoing_complaints">Go to Ongoing complaints</a>  |  <a href="#pending_complaints">Go to Submitted complaints</a></caption>
+        <caption><h2>COMPLETED COMPLAINTS</h2>
+          <div class="complain_navigation">
+            {% if completed_complaints.has_previous %}
+      <a href="?completed_page={{ completed_complaints.previous_page_number }}">Previous</a>
+    {% endif %}
+    <span>
+      Page {{ completed_complaints.number }} of {{ completed_complaints.paginator.num_pages }}.
+    </span>
+    {% if completed_complaints.has_next %}
+      <a href="?completed_page={{ completed_complaints.next_page_number }}">Next</a>
+    {% endif %}
+          </div>
+          <a href="#ongoing_complaints">Go to Ongoing complaints</a>  |  <a href="#pending_complaints">Go to Submitted complaints</a></caption>
         <thead>
           <tr>
             <th scope="col" id="id">ID</th>

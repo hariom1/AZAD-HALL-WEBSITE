@@ -121,8 +121,14 @@ def showComplaints(request):
             current_page_pending = pending_paginator.page(request.GET.get('pending_page', 1))
 
             completed_complaints = complaints.objects.filter(status="Completed").order_by("-id")
+            completed_paginator = Paginator(completed_complaints, 10)
+            current_page_completed = completed_paginator.page(request.GET.get('completed_page', 1))
+
             ongoing_complaints = complaints.objects.filter(status="Ongoing")
-            params = {"pending_complaints": current_page_pending, "completed_complaints": completed_complaints, "ongoing_complaints": ongoing_complaints}
+            ongoing_paginator = Paginator(ongoing_complaints, 10)
+            current_page_ongoing = ongoing_paginator.page(request.GET.get('ongoing_page', 1))
+
+            params = {"pending_complaints": current_page_pending, "completed_complaints": current_page_completed, "ongoing_complaints": current_page_ongoing}
             return render(request,'showComplaints.html', params)
     messages.info(request, 'Please login with valid ID to access complaints')
     return redirect("/")
