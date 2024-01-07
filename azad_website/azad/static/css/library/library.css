@@ -7,6 +7,7 @@
     border-radius: 10px;
     border: 1px solid #167f92;
   }
+
   .responstable tr {
     border: 1px solid #d9e4e6;
   }
@@ -118,4 +119,8 @@
   }
   h1 span {
     color: #167f92;
+  }
+
+  .bottom{
+    margin-bottom: 5rem;
   }

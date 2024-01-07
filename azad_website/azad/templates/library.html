@@ -851,9 +851,9 @@
                         <li class="nav-item dropdown contact-nav"><a class="nav-link" href="/complain">
                                 <h3>Mess Complain</h3>
                             </a></li>
-                            <li class="nav-item dropdown contact-nav"><a class="nav-link" href="/achievements">
+                            {% comment %} <li class="nav-item dropdown contact-nav"><a class="nav-link" href="/achievements">
                                 <h3>Achievements</h3>
-                            </a></li>
+                            </a></li> {% endcomment %}
                         {% comment %} <div class="notification dropdown"><button type="button" id="react-aria-:R31kt6:"
                                 aria-expanded="false"
                                 style="width:fit-content;background-color:#f8f9fa;border:none;padding:0px;margin:0px"
@@ -1065,7 +1065,19 @@
 
                             </table>
                             </div>
-
+                            <div class="complain_navigation bottom">
+                                {% if books.has_previous %}
+                          <a href="?books_page={{ books.previous_page_number }}">Previous</a>
+                        {% endif %}
+                        <span>
+                            {% if books.number %}
+                                Page {{ books.number }} of {{ books.paginator.num_pages }}.
+                            {% endif %}
+                        </span>
+                        {% if books.has_next %}
+                          <a href="?books_page={{ books.next_page_number }}">Next</a>
+                        {% endif %}
+                              </div>
                     </div>
                 </div>
                 <!-- <footer class="footer">

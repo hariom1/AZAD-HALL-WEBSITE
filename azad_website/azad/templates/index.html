@@ -248,24 +248,36 @@
 
         <div class="off-screen-navigation">
             <ul class="nav">
-                <li onclick="window.open(`{% url 'events' %}`, '_self')">
+                {% comment %} <li onclick="window.open(`{% url 'events' %}`, '_self')">
                     <a href="{% url 'events' %}">
                         <i class="fa fa-briefcase"></i>
                         <span>Events</span>
                     </a>
-                </li>
-                <li onclick="window.open(`{% url 'noticeboard' %}`, '_self')">
-                    <a href="{% url 'noticeboard' %}">
+                </li> {% endcomment %}
+                <li onclick="window.open(`{% url 'khoj' %}`, '_self')">
+                    <a href="{% url 'khoj' %}">
                         <i class="fa fa-pencil"></i>
-                        <span>Noticeboard</span>
+                        <span>Khoj</span>
                     </a>
                 </li>
-                <li onclick="window.open(`{% url 'achievements' %}`, '_self')">
+                <li onclick="window.open(`{% url 'complain' %}`, '_self')">
+                    <a href="{% url 'complain' %}">
+                        <i class="fa fa-pencil"></i>
+                        <span>Complain</span>
+                    </a>
+                </li>
+                <li onclick="window.open(`{% url 'library' %}`, '_self')">
+                    <a href="{% url 'library' %}">
+                        <i class="fa fa-pencil"></i>
+                        <span>Library</span>
+                    </a>
+                </li>
+                {% comment %} <li onclick="window.open(`{% url 'achievements' %}`, '_self')">
                     <a href="{% url 'achievements' %}">
                         <i class="fa fa-money"></i>
                         <span>Achievements</span>
                     </a>
-                </li>
+                </li> {% endcomment %}
                 <li onclick="window.open(`{% url 'about' %}`, '_self')" i>
                     <a href="{% url 'about' %}">
                         <i class="fa fa-user"></i>
@@ -346,7 +358,7 @@
                                 always reputed for its stellar
                                 performances in Soc-Cult events, especially Dramatics and Choreography.</p>
                             <a style="margin-bottom: 3px;" href="{% url 'khoj' %}" class="btn btn-default next">Khoj</a>
-                            <a style="margin-bottom: 3px;" href="{% url 'achievements' %}" class="btn btn-default next">Achievements</a>
+                            {% comment %} <a style="margin-bottom: 3px;" href="{% url 'achievements' %}" class="btn btn-default next">Achievements</a> {% endcomment %}
                             <a style="margin-bottom: 3px;" href="{% url 'about' %}" class="btn btn-default next">About</a>
                             {% if user.is_authenticated %}
                             <a style="margin-bottom: 3px;" href="{% url 'library' %}" class="btn btn-default next">Library</a>
