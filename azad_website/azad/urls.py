@@ -37,6 +37,7 @@ urlpatterns = [
     path('addBooks', views.addBooks, name='addBooks'),
     path('previousBookRequests', views.previousBookRequests, name='previousBookRequests'),
     path('cancelBookRequest', views.cancelBookRequest, name='cancelBookRequest'),
+    path('alumni', views.alumni, name='alumni'),
 ]
 
 if settings.DEBUG:  

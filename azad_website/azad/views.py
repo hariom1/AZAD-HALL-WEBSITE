@@ -44,6 +44,9 @@ def importBooksFromExcel(request):
 
         return render(request, 'index.html')
 
+def alumni(request):
+    return render(request, 'alumni.html')
+
 def addBooks(request):
     if request.user.is_authenticated:
         email=request.user.email
