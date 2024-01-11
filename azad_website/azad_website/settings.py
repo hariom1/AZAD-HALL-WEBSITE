@@ -25,9 +25,9 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 SECRET_KEY = 'django-insecure-%*-!5@3%z+2br$s7pr_%g97dwaim7$r9ju&_#=xrmr*yam+q7r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['somya.pythonanywhere.com','127.0.0.1', 'localhost', '2321-203-110-242-34.ngrok-free.app', ".vercel.app"]
 
 
 # Application definition
@@ -79,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'azad_website.wsgi.app'
+WSGI_APPLICATION = 'azad_website.wsgi.application'
 
 
 # Database
@@ -87,11 +87,8 @@ WSGI_APPLICATION = 'azad_website.wsgi.app'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'adminme$default',
-        'USER': 'adminme',
-        'PASSWORD': 'befaster45',
-        'HOST': 'adminme.mysql.pythonanywhere-services.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -143,15 +140,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-# For local, is should be /static/
-# For production, it should be /azad/static/
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'azad_website'),)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build','static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'azad/static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'azad/assets')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'azad/static/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -171,7 +167,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
-
-SITE_ID = 1
+SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
