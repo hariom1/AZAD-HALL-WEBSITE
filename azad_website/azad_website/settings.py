@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+CSRF_TRUSTED_ORIGINS=["https://azad-f6lqfpksrq-el.a.run.app",]
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
