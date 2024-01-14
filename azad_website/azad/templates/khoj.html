@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../static/css/khoj.css">
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'images/faviconaz.png' %}" type="image/png" />
 
 </head>
 
@@ -34,13 +34,13 @@
         <a href="#" class="logo"><span>KHOJ</span> ২३</a>
 
         <nav class="navbar">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
+            <a href="/">Home</a>
+            <a href="#about">About Khoj</a>
             <a href="#events">Timeline</a>
             <a href="#gallery">Gallery</a>
             <a href="#sponsors">Sponsors</a>
             <a href="#contact">Contact</a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeFBQZVGZAJIWSVniE8Zr6B1gF8joktJCiLSmbQVt0sf9cpCg/viewform" target="_blank" style="color: var(--main-color); font-weight: 700 ; font-size: 2.5rem;">Register</a>
+            {% comment %} <a href="https://docs.google.com/forms/d/e/1FAIpQLSeFBQZVGZAJIWSVniE8Zr6B1gF8joktJCiLSmbQVt0sf9cpCg/viewform" target="_blank" style="color: var(--main-color); font-weight: 700 ; font-size: 2.5rem;">Register</a> {% endcomment %}
 
             <!-- <a href="#" class="btn screen-sm-hidden" style="color: #1f1f1f;">Register</a> -->
 
@@ -417,11 +417,11 @@
 
     <section class="footer">
         <div class="center">
-            <div><a href="https://www.facebook.com/azad.hall/" target="blank"> <i class="ri-facebook-circle-fill"></i>
+            <div><a href="https://www.facebook.com/azad.hall/" target="blank"> <i class="fa-brands fa-facebook"></i>
                 </a></div>
-            <div><a href="https://www.instagram.com/azadian.iitkgp/" target="blank"> <i class="ri-instagram-fill"></i>
+            <div><a href="https://www.instagram.com/azadian.iitkgp/" target="blank"><i class="fa-brands fa-square-instagram"></i>
                 </a></div>
-            <div><a href="https://www.youtube.com/@azadhallofresidence1579/featured"> <i class="ri-youtube-fill"></i>
+            <div><a href="https://www.youtube.com/@azadhallofresidence1579/featured"> <i class="fa-brands fa-youtube"></i>
                 </a></div>
         </div>
     </section>
@@ -433,7 +433,7 @@
     <!-- custom js file link  -->
     <script src="../static/js/khoj.js"></script>
     <script src="../static/js/timelineKhoj.js"></script>
-
+    <script src="https://kit.fontawesome.com/af91154735.js" crossorigin="anonymous"></script>
 
 </body>
 

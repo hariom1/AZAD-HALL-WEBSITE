@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" type="text/css" />
-
+    <meta name="referrer" content="origin"> 
     <title>About | Azad Hall Of Residence</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
@@ -31,6 +31,8 @@
 
     <!-- Template Main CSS File -->
     <link href="{% static 'css/about.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'images/faviconaz.png' %}" type="image/png" />
+
     <style>
         ::-webkit-scrollbar {
             width: 5px;
@@ -2676,7 +2678,7 @@
                     </div>
 
                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                        <form action="" name="Contact_Us_form_about_page" method="POST">
+                        <form action="https://formsubmit.io/send/harsh247gupta@gmail.com" name="Contact_Us_form_about_page" method="POST">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="form-group col-md-6">

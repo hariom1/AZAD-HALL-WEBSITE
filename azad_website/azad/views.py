@@ -13,6 +13,7 @@ from openpyxl import load_workbook
 from datetime import datetime, timedelta
 from django.contrib import messages
 from django.core.paginator import Paginator, Page
+from django.views.decorators.csrf import csrf_protect
 
 
 allowedEmails=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com", "sg06959.sgsg@gmail.com"]
@@ -85,11 +86,12 @@ def index(request):
     
     return render(request, 'index.html')
 
+@csrf_protect
 def complain(request):
     if request.user.is_authenticated:
         return render(request, 'complain.html')
 
-
+@csrf_protect
 def submit_form(request):
     if request.method == 'POST' and request.user.is_authenticated :
         category = request.POST.get('category')
@@ -110,7 +112,8 @@ def submit_form(request):
         # message="Complain submitted successfully!"
         # params={"message":message,"name":name}
         messages.info(request, 'Complain submitted successfully')
-        return redirect("/")
+        # return render(request, 'index.html')
+        return redirect('/')
     else:
         # Handle GET requests or other methods if necessary
         return HttpResponse('Invalid request method')
