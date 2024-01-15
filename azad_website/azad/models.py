@@ -26,8 +26,8 @@ class complaints(models.Model):
     image_link = models.URLField(null=True)
 
 class book(models.Model):
-    title=models.CharField(max_length=50, null=True)
-    author=models.CharField(max_length=50, null=True)
+    title=models.CharField(max_length=100, null=True)
+    author=models.CharField(max_length=100, null=True)
     department=models.CharField(max_length=20, null=True)
     shelf=models.IntegerField(null=True)
     quantity=models.IntegerField(null=True)
