@@ -33,7 +33,7 @@
         
         <thead>
           <tr>
-            <th scope="col" id="id">ID</th>
+            <th scope="col">ID</th>
             <th scope="col">Date</th>
             <th scope="col">Name</th>
             <th scope="col">Roll Number</th>
@@ -49,7 +49,7 @@
         <form action="/approve" method='post'>
             {% csrf_token %}
         <tr>
-            <td data-label="id"><input name="id" type="text" readonly value={{requestedBook.id}}></td>
+            <td data-label="id"><input id="id" name="id" type="text" readonly value={{requestedBook.id}} style="width:4rem;"></td>
             <td data-label="Created at">{{requestedBook.created_at}}</td>
             <td data-label="Name">{{requestedBook.studentName}}</td>
             <td data-label="Roll Nummber">{{requestedBook.studentRoll_no}}</td>
@@ -86,7 +86,7 @@
         
         <thead>
           <tr>
-            <th scope="col" id="id">ID</th>
+            <th scope="col">ID</th>
             <th scope="col">Date</th>
             <th scope="col">Name</th>
             <th scope="col">Contact Number</th>
@@ -102,7 +102,7 @@
         <form action="/checkIn" method='post'>
             {% csrf_token %}
         <tr>
-            <td data-label="id"><input name="id" type="text" readonly value={{checkedOutBook.id}}></td>
+            <td data-label="id"><input  id="id" name="id" type="text" readonly value={{checkedOutBook.id}} style="width:4rem;"></td>
             <td data-label="Created at">{{checkedOutBook.created_at}}</td>
             <td data-label="Name">{{checkedOutBook.studentName}}</td>
             <td data-label="Roll Nummber">{{checkedOutBook.studentRoll_no}}</td>

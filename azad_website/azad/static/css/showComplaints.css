@@ -8,6 +8,10 @@
 
 #id {
   width: 2%;
+  background-color: transparent;
+  border: none;
+  text-align: center;
+
 }
 
 textarea {
@@ -62,9 +66,9 @@ table th {
 }
 
 input {
-  all: unset;
+  /* all: unset; */
   width: 20px;
-  text-align: center;
+
 }
 .complain_navigation{
   width: 100%;
@@ -148,4 +152,7 @@ table a {
 body {
   font-family: "Open Sans", sans-serif;
   line-height: 1.25;
+}
+.complain_navigation{
+  margin: 1rem;
 }

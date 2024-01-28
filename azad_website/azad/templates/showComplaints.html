@@ -31,7 +31,7 @@
         
         <thead>
           <tr>
-            <th scope="col" id="id">ID</th>
+            <th scope="col">ID</th>
             <th scope="col">Date</th>
             <th scope="col">Name</th>
             <th scope="col">Room number</th>
@@ -50,7 +50,7 @@
         <form action="/updateStatus" method='post'>
             {% csrf_token %}
         <tr>
-            <td data-label="id"><input name="id" type="text" readonly value={{complain.id}}></input></td>
+            <td data-label="id"><input  id="id" name="id" type="text" readonly value={{complain.id}} style="width:4rem;"></input></td>
             <td data-label="Created at">{{complain.created_at}}</td>
             <td data-label="Name">{{complain.name}}</td>
             <td data-label="Room Number">{{complain.room_no}}</td>
@@ -88,7 +88,7 @@
           <a href="#completed_complaints">Go to Completed complaints</a>  |  <a href="#pending_complaints">Go to Submitted complaints</a></caption>
         <thead>
           <tr>
-            <th scope="col" id="id">ID</th>
+            <th scope="col">ID</th>
             <th scope="col">Date</th>
             <th scope="col">Name</th>
             <th scope="col">Room number</th>
@@ -106,7 +106,7 @@
         <form action="/updateStatus" method='post'>
             {% csrf_token %}
         <tr>
-            <td data-label="id"><input name="id" type="text" readonly value={{complain.id}}></input></td>
+            <td data-label="id"><input  id="id" name="id" type="text" readonly value={{complain.id}} style="width:4rem;"></input></td>
             <td data-label="Created at">{{complain.created_at}}</td>
             <td data-label="Name">{{complain.name}}</td>
             <td data-label="Room Number">{{complain.room_no}}</td>
@@ -139,7 +139,7 @@
           <a href="#ongoing_complaints">Go to Ongoing complaints</a>  |  <a href="#pending_complaints">Go to Submitted complaints</a></caption>
         <thead>
           <tr>
-            <th scope="col" id="id">ID</th>
+            <th scope="col">ID</th>
             <th scope="col">Date</th>
             <th scope="col">Name</th>
             <th scope="col">Room number</th>
@@ -155,7 +155,7 @@
 
         {% for complain in completed_complaints %}
           <tr>
-            <td data-label="id"><input name="id" type="text" readonly value={{complain.id}}></input></td>
+            <td data-label="id"><input  id="id" name="id" type="text" readonly value={{complain.id}} style="width:4rem;"></input></td>
             <td data-label="Created at">{{complain.created_at}}</td>
             <td data-label="Name">{{complain.name}}</td>
             <td data-label="Room Number">{{complain.room_no}}</td>
