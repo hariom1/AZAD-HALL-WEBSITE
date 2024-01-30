@@ -71,7 +71,7 @@ input {
 
 }
 .complain_navigation{
-  width: 100%;
+  /* width: 100%; */
   text-align: center;
   padding: .5rem;
   font-size: 1.2rem;
@@ -101,19 +101,25 @@ input {
   }
 
   table tr {
-    border-bottom: 3px solid #ddd;
+    border: 2px solid #646464;
     display: block;
-    margin-bottom: .625em;
+    margin-bottom: 1.2em;
   }
 
-  tr:nth-child(even) {
-    background-color: #f8f8f8;
+  td:nth-child(even) {
+  background-color: #ebebeb;
+  /* background-color: #cecece; */
   }
+  td:nth-child(odd){
+    background-color: #d2d1d1;
+
+  }
+  
 
   table td {
     border-bottom: 1px solid #ddd;
     display: block;
-    font-size: .8em;
+    font-size: 1em;
     text-align: right;
   }
 

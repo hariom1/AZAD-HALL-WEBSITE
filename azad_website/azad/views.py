@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 from django.contrib import messages
 from django.core.paginator import Paginator, Page
 from django.views.decorators.csrf import csrf_protect
+from datetime import datetime
 
 
 allowedEmails=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com", "sg06959.sgsg@gmail.com"]
@@ -250,6 +251,24 @@ def checkout(request):
 
 def checkedOutBooks(request):
     if request.user.is_authenticated and request.user.email in allowedEmailsLibrary:
+        now=datetime.now()
+        books = requestedBook.objects.all()
+        for Rbook in books:
+            b = Rbook.created_at[0:10]
+            a = datetime.strptime(b, '%d/%m/%Y')
+            print((now-a).days)
+            if((now-a).days>3):
+                boarder=azad_boarders.objects.get(emails=Rbook.email)
+                boarder.books-=1
+                boarder.save()
+                Book=book.objects.get(id = Rbook.bookID)
+                Book.available+=1
+                Book.save()
+                Rbook.delete()
+
+            
+            
+
         requestedBooks = requestedBook.objects.filter(status="requested")
         requestedBooks_paginator = Paginator(requestedBooks, 10)
         current_page_requestedBooks = requestedBooks_paginator.page(request.GET.get('requestedBooks_page', 1))

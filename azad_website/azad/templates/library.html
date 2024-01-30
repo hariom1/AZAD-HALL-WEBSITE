@@ -62,9 +62,10 @@
         
            
             
-                <div style="height:fit-content;margin-bottom:50px" class="header row">
+                <div style="height:fit-content;margin-bottom:50px;display:flex;flex-direction:column;align-items: center;font-size:1.4rem" class="header row">
                     <h1 class= "Meet"style="margin:20px auto 0px auto;font-size:3rem;color:black;font-weight:bold;text-align:center">
                         HALL LIBRARY</h1>
+                        <a href="/previousBookRequests">Previous Book Requests</a>
                 </div>
             {% comment %} alert message {% endcomment %}
             {% comment %} sending message as parameter {% endcomment %}
@@ -82,7 +83,7 @@
             </div></div>
             {% endfor %}
             {% endif %}
-                <div style="display:flex;justify-content:center;gap:20px">
+                <div style="display:flex;justify-content:center;">
                   
                     <div class="startups">
                         <div class="search-container row">
@@ -111,10 +112,10 @@
                       <a href="?books_page={{ books.next_page_number }}">Next</a>
                     {% endif %}
                           </div>
-                        <div class="table">
+                        <div class="table" style="padding:.5rem;">
 
 
-                            <table>
+                            <table >
                                 <thead>
                                   <tr>
                                     <th scope="col">ID</th>
@@ -132,17 +133,17 @@
                                 <tr>
                                     <form action="/checkout" method="post">
                                         {% csrf_token %}
-                                    <td data-label="id"><input id="id" name="id" type="text" readonly value={{book.id}} style="width:4rem;"></td>
-                                    <td data-label="Title">{{book.title}}</td>
-                                    <td data-label="Author">{{book.author}}</td>
-                                    <td data-label="Department">{{book.department}}</td>
-                                    <td data-label="complain">{{book.quantity}}</td>
-                                    <td data-label="Status">{{book.available}}</td>
+                                    <td style="padding:1rem;" data-label="id"><input id="id" name="id" type="text" readonly value={{book.id}} style="width:4rem;"></td>
+                                    <td  style="padding:.8rem;" data-label="Title">{{book.title}}</td>
+                                    <td style="padding:.8rem;" data-label="Author">{{book.author}}</td>
+                                    <td style="padding:.8rem;" data-label="Department">{{book.department}}</td>
+                                    <td style="padding:.8rem;" data-label="complain">{{book.quantity}}</td>
+                                    <td style="padding:.8rem;" data-label="Status">{{book.available}}</td>
                                     {% if book.available == 0 %}
-                                    <td data-label="Completed_on"><button type="submit" disabled>Check out</button></td>
+                                    <td style="padding:.8rem;" data-label="Completed_on"><button type="submit" disabled>Check out</button></td>
                                     
                                     {% else %}
-                                    <td data-label="Completed_on"><button type="submit">Check out</button></td>
+                                    <td style="padding:.8rem;" data-label="Completed_on"><button type="submit">Check out</button></td>
                                     
                                     {% endif %}
                                     </form>

@@ -11,15 +11,14 @@ margin: 1rem; }
   position: relative;
   background-color: #707aea;
   padding-right: 2rem;
-  border-radius: 0 0rem 1rem 1rem;
  }
 
 
 
 .site-header__wrapper {
   
-  padding-top: 1rem;
-  padding-bottom: 1rem; 
+  padding-top: .3rem;
+  padding-bottom: .3rem; 
   }
   @media (min-width: 600px) {
     .site-header__wrapper {
@@ -35,6 +34,7 @@ margin: 1rem; }
 @media (max-width: 599px) {
   .nav__wrapper {
     position: absolute;
+    margin: 1rem;
     border-radius: .5rem;
     top: 100%;
     right: 0;
@@ -69,7 +69,7 @@ cursor: pointer;}
     .nav__toggle {
       display: block;
       position: absolute;
-      top: 2.2rem;
+      top: 1.8rem;
     right: 2rem;
   background-color: transparent;
 border: none; } }
