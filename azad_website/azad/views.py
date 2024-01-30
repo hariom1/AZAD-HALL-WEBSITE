@@ -216,7 +216,7 @@ def library(request, searchedBooks=None, str=None):
             books=searchedBooks
             return render(request, 'library.html', {'books':books, 'searchedString':str})
         else:
-            books = book.objects.all()
+            books = book.objects.all().order_by('id')
         books_paginator = Paginator(books, 30)
         current_page_books = books_paginator.page(request.GET.get('books_page', 1))
         # message=None
