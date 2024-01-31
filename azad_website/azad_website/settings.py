@@ -168,5 +168,5 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
 SITE_ID = 2
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'https://azad-f6lqfpksrq-el.a.run.app/accounts/google/login/callback/'
 LOGOUT_REDIRECT_URL = '/'
