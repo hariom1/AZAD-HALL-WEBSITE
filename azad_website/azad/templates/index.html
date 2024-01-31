@@ -413,7 +413,7 @@
                             <p style="margin: 0;font-size: 16px;margin-bottom: 10px;color: white;">  Welcome {{ name }}</p>
                             
                             {% else %}
-                            <a style="margin-bottom: 3px;" href="https://azad-f6lqfpksrq-el.a.run.app/accounts/google/login/callback/" class="btn btn-default next">Login</a>
+                            <a style="margin-bottom: 3px;" href="{% provider_login_url 'google' %}" class="btn btn-default next">Login</a>
                             <p style="margin: 0;font-size: 16px;margin-bottom: 10px;color: white;">Login with your registered personal mail ID to access Mess/Maintenanace complain</p>
                             {% endif %}
                         </div>
