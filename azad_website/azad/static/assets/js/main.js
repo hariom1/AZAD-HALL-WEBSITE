@@ -19,10 +19,10 @@
 
     if (window.pageYOffset > sticky) {
       header_navbar.classList.add("sticky");
-      logo.src = "static/images/logo.png";
+      logo.src = "static/images/logo.webp";
     } else {
       header_navbar.classList.remove("sticky");
-      logo.src = "static/images/logo.png";
+      logo.src = "static/images/logo.webp";
     }
 
     // show or hide the back-top-top button
@@ -137,7 +137,7 @@
             nb_sides: 5,
           },
           image: {
-            src: "img.png",
+            src: "img.webp",
             width: 33,
             height: 33,
           },
@@ -249,7 +249,7 @@
             nb_sides: 5,
           },
           image: {
-            src: "img.png",
+            src: "img.webp",
             width: 33,
             height: 33,
           },

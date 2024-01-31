@@ -33,10 +33,10 @@ $('.collapse').on('hidden.bs.collapse', function () {
 
     if (window.pageYOffset > sticky) {
       header_navbar.classList.add("sticky");
-      logo.src = "/static/images/logo_black.png";
+      logo.src = "/static/images/logo_black.webp";
     } else {
       header_navbar.classList.remove("sticky");
-      logo.src = "/static/images/logo.png";
+      logo.src = "/static/images/logo.webp";
     }
 
     // show or hide the back-top-top button

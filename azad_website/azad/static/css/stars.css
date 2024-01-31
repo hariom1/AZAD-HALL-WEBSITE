@@ -289,19 +289,19 @@ body {
 }
 
 .stars {
-  background: #000 url("https://wolf.drjm.co.uk/nightsky/stars.jpg") repeat top center;
+  background: #000 url("https://wolf.drjm.co.uk/nightsky/stars.webp") repeat top center;
   z-index: 0;
 }
 
 .twinkleMask {
-  background: transparent url("https://wolf.drjm.co.uk/nightsky/twinklemask.png") repeat top center;
+  background: transparent url("https://wolf.drjm.co.uk/nightsky/twinklemask.webp") repeat top center;
   z-index: 1;
   -webkit-animation: twinkleFrames 700s linear infinite;
           animation: twinkleFrames 700s linear infinite;
 }
 
 .twinkleMask2 {
-  background: transparent url("https://wolf.drjm.co.uk/nightsky/twinkleMask2.png") repeat top center;
+  background: transparent url("https://wolf.drjm.co.uk/nightsky/twinkleMask2.webp") repeat top center;
   z-index: 2;
   height: 200%;
   -webkit-animation: twinkleFrames2 300s linear infinite;
@@ -309,7 +309,7 @@ body {
 }
 
 .clouds {
-  background: transparent url("https://wolf.drjm.co.uk/nightsky/clouds.png") repeat top center;
+  background: transparent url("https://wolf.drjm.co.uk/nightsky/clouds.webp") repeat top center;
   z-index: 3;
   height: 150%;
   -webkit-animation: cloudsFrames 300s linear infinite;
