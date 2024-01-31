@@ -120,7 +120,8 @@ SOCIALACCOUNT_PROVIDERS = {
             'client_id': '849423050293-a80hoh8l9us2c17h974ojn5aqr5qprqj.apps.googleusercontent.com',
             'secret': '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',
             'key': '',  # Optional, you can leave this empty
-        }
+        },
+        'redirect_uris': ['https://azad-f6lqfpksrq-el.a.run.app/accounts/google/login/callback/'],  # Update with your HTTPS domain
     }
 }
 
@@ -163,10 +164,12 @@ EMAIL_HOST_USER = 'emailhost'
 EMAIL_HOST_PASSWORD = "password"
 EMAIL_PORT = 587
 
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
 SITE_ID = 2
-LOGIN_REDIRECT_URL = 'https://azad-f6lqfpksrq-el.a.run.app/accounts/google/login/callback/'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
