@@ -29,7 +29,8 @@ margin: 1rem; }
       padding-bottom: 0; } }
 @media (min-width: 600px) {
   .nav__wrapper {
-    display: flex; } }
+    display: flex;
+  height: 2rem; } }
 
 @media (max-width: 599px) {
   .nav__wrapper {
@@ -69,7 +70,7 @@ cursor: pointer;}
     .nav__toggle {
       display: block;
       position: absolute;
-      top: 1.8rem;
+      top: 1.5rem;
     right: 2rem;
   background-color: transparent;
 border: none; } }

@@ -62,7 +62,7 @@
         
            
             
-                <div style="height:fit-content;margin-bottom:50px;display:flex;flex-direction:column;align-items: center;font-size:1.4rem" class="header row">
+                <div style="height:fit-content;margin-bottom:50px;display:flex;flex-direction:column;align-items: center;font-size:1.4rem;text-align:center" class="header row">
                     <h1 class= "Meet"style="margin:20px auto 0px auto;font-size:3rem;color:black;font-weight:bold;text-align:center">
                         HALL LIBRARY</h1>
                         <a href="/previousBookRequests">Previous Book Requests</a>
@@ -137,13 +137,13 @@
                                     <td  style="padding:.8rem;" data-label="Title">{{book.title}}</td>
                                     <td style="padding:.8rem;" data-label="Author">{{book.author}}</td>
                                     <td style="padding:.8rem;" data-label="Department">{{book.department}}</td>
-                                    <td style="padding:.8rem;" data-label="complain">{{book.quantity}}</td>
-                                    <td style="padding:.8rem;" data-label="Status">{{book.available}}</td>
+                                    <td style="padding:.8rem;" data-label="Quantity">{{book.quantity}}</td>
+                                    <td style="padding:.8rem;" data-label="Available">{{book.available}}</td>
                                     {% if book.available == 0 %}
-                                    <td style="padding:.8rem;" data-label="Completed_on"><button type="submit" disabled>Check out</button></td>
+                                    <td style="padding:.8rem;" data-label="Check Out"><button style="padding:.4rem;border-radius:.2rem;"  type="submit" disabled>Check out</button></td>
                                     
                                     {% else %}
-                                    <td style="padding:.8rem;" data-label="Completed_on"><button type="submit">Check out</button></td>
+                                    <td style="padding:.8rem;" data-label="Check Out"><button style="padding:.2rem;border-radius:.2rem;" type="submit">Check out</button></td>
                                     
                                     {% endif %}
                                     </form>

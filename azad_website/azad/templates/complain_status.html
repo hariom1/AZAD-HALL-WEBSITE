@@ -12,6 +12,7 @@
 </head>
 <body>
     <table>
+      {% if complains %}
         <caption>COMPLAINTS</caption>
         <thead>
           <tr>
@@ -47,6 +48,9 @@
           </tr>
         {% endfor %} 
         </tbody>
+        {% else %}
+        <div>You have not registered any complaints yet.</div>
+        {% endif %}
       </table>
 
       <!-- script to limit length of displayed complain to specified characters -->

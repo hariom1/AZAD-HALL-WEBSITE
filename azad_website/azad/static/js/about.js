@@ -262,7 +262,7 @@
 
     /*to display hcm members based on year selected*/
     let hcmYear = document.getElementById("hcm-year");
-    hcmYear.addEventListener('click', ()=>{
+    hcmYear.addEventListener('input', ()=>{
         let id = "hcm" + hcmYear.value;
         console.log(id);
         let elems = document.querySelectorAll(".hcmMembers");
@@ -275,7 +275,7 @@
     })
 
     let webYear = document.getElementById("web-year");
-    webYear.addEventListener('click', ()=>{
+    webYear.addEventListener('input', ()=>{
         let id = "web" + webYear.value;
         console.log(id);
         let elems = document.querySelectorAll(".webMembers");
@@ -286,7 +286,7 @@
         selectedElem.style.display = "grid";
     })
     let capYear = document.getElementById("gccaptain-year");
-    capYear.addEventListener('click', ()=>{
+    capYear.addEventListener('input', ()=>{
         let id = "captains" + capYear.value;
         console.log(id);
         let elems = document.querySelectorAll(".captains");

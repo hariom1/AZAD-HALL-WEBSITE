@@ -14,10 +14,14 @@
 <body>
 
 
+
+
     <table id="pending_complaints">
         <caption>
           <h2>REQUESTS</h2>
          <div class="complain_navigation">
+
+          {% if requestedBooks %}
             {% if requestedBooks.has_previous %}
       <a href="?requestedBooks_page={{ requestedBooks.previous_page_number }}">Previous</a>
     {% endif %}
@@ -45,6 +49,7 @@
         </thead>
         <tbody>
 
+        
         {% for requestedBook in requestedBooks %}
         <form action="/cancelBookRequest" method='post'>
             {% csrf_token %}
@@ -60,7 +65,14 @@
 
           </tr>
         </form>
+
+        
+
+        
         {% endfor %} 
+        {% else %}
+         <div>No book requests yet. Search in library for books.</div>
+        {% endif %}
         </tbody>
       </table>
 
@@ -70,6 +82,7 @@
       <table id="pending_complaints">
         <caption>
           <h2>CHECKED-OUT BOOKS</h2>
+          {% if checkedOutBooks %}
          <div class="complain_navigation">
             {% if checkedOutBooks.has_previous %}
       <a href="?checkedOutBooks_page={{ checkedOutBooks.previous_page_number }}">Previous</a>
@@ -114,6 +127,9 @@
           </tr>
         </form>
         {% endfor %} 
+        {% else %}
+        <div>No books have been checked out. Search in library for books.</div>
+       {% endif %}
         </tbody>
       </table>
 </body>
