@@ -160,11 +160,13 @@ def updateStatus(request):
         complain = complaints.objects.get(id=id)
         if(complain.status=="Ongoing"):
             complain.status="Completed"
+            send_mail("Regarding mess/maintenance complain", "Your mess/maintenance complain has been resolved. Kindly check the manager review from our website.\nWebsite link: azadian.org", "azad1954.iitkgp@gmail.com", [complain.email])
         else:
             if(set_status=="ongoing"):
                 complain.status="Ongoing"
             else:
                 complain.status="Completed"
+                send_mail("Regarding mess/maintenance complain", "Your mess/maintenance complain has been resolved. Kindly check the manager review from our website.\nWebsite link: azadian.org", "azad1954.iitkgp@gmail.com", [complain.email])
         # if(complain.status=="pending"):
         #     complain.status="Ongoing"
         # else:
