@@ -22,7 +22,7 @@ urlpatterns = [
     path('importFromExcel', views.import_from_excel, name='importFromExcel'),
     path('complain', views.complain, name='complain'),
     path('submit', views.submit_form, name='submit_form'),
-    path('showComplaints', views.showComplaints, name='showComplaints'),
+    path('showMaintenanceComplaints', views.showMaintenanceComplaints, name='showMaintenanceComplaints'),
     path('updateStatus', views.updateStatus, name='updateStatus'),
     path('complain_status', views.complain_status, name='complain_status'),
     path('fullComplain/<int:complain_id>', views.showFullComplain, name='fullComplain'),
@@ -38,6 +38,7 @@ urlpatterns = [
     path('previousBookRequests', views.previousBookRequests, name='previousBookRequests'),
     path('cancelBookRequest', views.cancelBookRequest, name='cancelBookRequest'),
     path('alumni', views.alumni, name='alumni'),
+    path('showMessComplaints', views.showMessComplaints, name='showMessComplaints'),
 ]
 
 if settings.DEBUG:  

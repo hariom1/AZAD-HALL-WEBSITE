@@ -119,20 +119,20 @@ def submit_form(request):
         # Handle GET requests or other methods if necessary
         return HttpResponse('Invalid request method')
 
-def showComplaints(request):
+def showMaintenanceComplaints(request):
     
     if request.user.is_authenticated:
         email=request.user.email
         if email in allowedEmails:
-            pending_complaints = complaints.objects.filter(status="pending")
+            pending_complaints = complaints.objects.filter(status="pending", category="maintenance")
             pending_paginator = Paginator(pending_complaints, 10)
             current_page_pending = pending_paginator.page(request.GET.get('pending_page', 1))
 
-            completed_complaints = complaints.objects.filter(status="Completed").order_by("-id")
+            completed_complaints = complaints.objects.filter(status="Completed", category="maintenance").order_by("-id")
             completed_paginator = Paginator(completed_complaints, 10)
             current_page_completed = completed_paginator.page(request.GET.get('completed_page', 1))
 
-            ongoing_complaints = complaints.objects.filter(status="Ongoing")
+            ongoing_complaints = complaints.objects.filter(status="Ongoing", category="maintenance")
             ongoing_paginator = Paginator(ongoing_complaints, 10)
             current_page_ongoing = ongoing_paginator.page(request.GET.get('ongoing_page', 1))
 
@@ -141,6 +141,28 @@ def showComplaints(request):
     messages.info(request, 'Please login with valid ID to access complaints')
     return redirect("/")
     
+
+def showMessComplaints(request):
+    
+    if request.user.is_authenticated:
+        email=request.user.email
+        if email in allowedEmails:
+            pending_complaints = complaints.objects.filter(status="pending", category="mess")
+            pending_paginator = Paginator(pending_complaints, 10)
+            current_page_pending = pending_paginator.page(request.GET.get('pending_page', 1))
+
+            completed_complaints = complaints.objects.filter(status="Completed", category="mess").order_by("-id")
+            completed_paginator = Paginator(completed_complaints, 10)
+            current_page_completed = completed_paginator.page(request.GET.get('completed_page', 1))
+
+            ongoing_complaints = complaints.objects.filter(status="Ongoing", category="mess")
+            ongoing_paginator = Paginator(ongoing_complaints, 10)
+            current_page_ongoing = ongoing_paginator.page(request.GET.get('ongoing_page', 1))
+
+            params = {"pending_complaints": current_page_pending, "completed_complaints": current_page_completed, "ongoing_complaints": current_page_ongoing}
+            return render(request,'showComplaints.html', params)
+    messages.info(request, 'Please login with valid ID to access complaints')
+    return redirect("/")
 
 def showFullComplain(request, complain_id):
     if request.user.is_authenticated:
