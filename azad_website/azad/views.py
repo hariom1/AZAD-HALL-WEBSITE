@@ -17,7 +17,7 @@ from django.views.decorators.csrf import csrf_protect
 from datetime import datetime
 
 
-allowedEmails=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com", "sg06959.sgsg@gmail.com", "somnathmishra1802@gmail.com"]
+allowedEmails=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com", "sg06959.sgsg@gmail.com", "somnathmishra1802@gmail.com", "apurbaghosh1973@gmail.com"]
 allowedEmailsLibrary=["harsh247gupta@gmail.com", "harsh90731@gmail.com", "rajumeshram767@gmail.com", "hariomk628@gmail.com", "sg06959.sgsg@gmail.com", "pranjalchouhan2014@gmail.com", "somnathmishra1802@gmail.com"]
 
 # def index(request):
